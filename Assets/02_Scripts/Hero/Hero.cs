@@ -4,6 +4,9 @@ public class Hero : MonoBehaviour
 {
     [Header("¿”Ω√")]
     [SerializeField] InputHandler _inputHandler;
+    [SerializeField] VCameraController _cameraController;
+
+    [Header("Hero≤®")]
     [SerializeField] Mover _mover;
     [SerializeField] HeroAnimator _animator;
 
@@ -12,5 +15,6 @@ public class Hero : MonoBehaviour
     {
         _inputHandler.OnMoveInput += _mover.Move;
         _inputHandler.OnMoveInput += _animator.OnMove;
+        _inputHandler.OnCameraRotInput += _cameraController.Rotate;
     }
 }

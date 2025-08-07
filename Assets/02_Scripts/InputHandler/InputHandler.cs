@@ -7,5 +7,5 @@ using UnityEngine;
 public abstract class InputHandler : MonoBehaviour
 {
     public abstract event Action<Vector3> OnMoveInput; // 이동 이벤트
-
+    public abstract event Action<Vector2> OnCameraRotInput; // 회전 이벤트
 }
