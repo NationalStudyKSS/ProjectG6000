@@ -33,10 +33,10 @@ public class RigidbodyMover : Mover
         _rigid.linearVelocity = _velocity;
 
         // 리지드바디에 목표 회전값에 따른 부드러운 회전 적용
-        //_rigid.rotation = Quaternion.RotateTowards(
-        //    _rigid.rotation,
-        //    _targetRotation,
-        //    _rotSpeed * Time.fixedDeltaTime);
+        _rigid.rotation = Quaternion.RotateTowards(
+            _rigid.rotation,
+            _targetRotation,
+            _rotSpeed * Time.fixedDeltaTime);
 
         // 이동 이벤트 발행
         _velocity.y = 0;
@@ -60,7 +60,7 @@ public class RigidbodyMover : Mover
             // 현재 속도값 설정
             _velocity = direction.normalized * _moveSpeed;
 
-            //_targetRotation = Quaternion.LookRotation(direction);
+            _targetRotation = Quaternion.LookRotation(direction);
         }
     }
 }
