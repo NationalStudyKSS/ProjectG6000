@@ -9,6 +9,7 @@ public class PlayerInputHandler : InputHandler
 {
     public override event Action<Vector3> OnMoveInput;
     public override event Action<Vector2> OnCameraRotInput;
+    public override event Action OnAttackInput;
 
     Vector3 _moveInput;
     Vector2 _cameraRotInput;
@@ -23,6 +24,16 @@ public class PlayerInputHandler : InputHandler
         _moveInput = new Vector3(moveInput.x, 0, moveInput.y);
     }
 
+    void OnAttack(InputValue inputValue)
+    {
+        OnAttackInput?.Invoke();
+        //Debug.Log("Attack Input Received");
+    }
+
+    /// <summary>
+    /// Plyaer Input으로부터 마우스 입력을 받는 함수
+    /// </summary>
+    /// <param name="inputValue"></param>
     void OnLook(InputValue inputValue)
     {
         _cameraRotInput = inputValue.Get<Vector2>();
@@ -32,7 +43,7 @@ public class PlayerInputHandler : InputHandler
     {
         //Debug.Log(_moveInput);
         OnMoveInput?.Invoke(_moveInput);
-        Debug.Log(_cameraRotInput);
+        //Debug.Log(_cameraRotInput);
         OnCameraRotInput?.Invoke(_cameraRotInput);
     }
 }

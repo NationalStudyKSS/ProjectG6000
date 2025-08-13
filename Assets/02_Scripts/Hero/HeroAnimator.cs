@@ -4,19 +4,24 @@ using UnityEngine;
 public class HeroAnimator : MonoBehaviour
 {
     Animator _animator;
-    Vector3 _moveInput;
+    Vector3 _velocity;
 
     void Awake()
     {
         _animator = GetComponent<Animator>();
     }
 
-    public void OnMove(Vector3 input)
+    public void OnMove(Vector3 velocity)
     {
-        _moveInput = input;
+        _velocity = velocity;
 
         //_animator.SetFloat("MoveX", _moveInput.x);
         //_animator.SetFloat("MoveY", _moveInput.z);
-        _animator.SetFloat("MoveSpeed", _moveInput.magnitude);
+        _animator.SetFloat("MoveSpeed", _velocity.magnitude);
+    }
+
+    public void OnAttack()
+    {
+        _animator.SetTrigger("OnAttack");
     }
 }

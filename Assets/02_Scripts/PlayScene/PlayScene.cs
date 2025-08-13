@@ -9,13 +9,16 @@ public class PlayScene : MonoBehaviour
     private void Start()
     {
         _inputHandler.OnMoveInput += OnMoveInput;
+        _inputHandler.OnAttackInput += OnAttackInput;
+
         if (_cameraController == null)
         {
             Debug.LogError("VCameraController is not assigned in PlayScene.");
             return;
         }
         _inputHandler.OnCameraRotInput += _cameraController.Rotate;
-        
+
+        _hero.Initialize();
     }
 
     void OnMoveInput(Vector3 inputVector)
@@ -37,5 +40,10 @@ public class PlayScene : MonoBehaviour
         Vector3 direction = camForward * inputVector.z + camRight * inputVector.x;
 
         _hero.Move(direction);
+    }
+
+    void OnAttackInput()
+    {
+        _hero.Attack();
     }
 }
