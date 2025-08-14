@@ -4,21 +4,25 @@ public class PlayScene : MonoBehaviour
 {
     [SerializeField] Hero _hero;
     [SerializeField] InputHandler _inputHandler;
-    [SerializeField] CameraController _cameraController;
+    [SerializeField] DialogueSystem _dialogueSystem;
+
+    //[SerializeField] CameraController _cameraController;
 
     private void Start()
     {
         _inputHandler.OnMoveInput += OnMoveInput;
         _inputHandler.OnAttackInput += OnAttackInput;
+        _inputHandler.OnInteractInput += OnInteractInput;
 
-        if (_cameraController == null)
-        {
-            Debug.LogError("VCameraController is not assigned in PlayScene.");
-            return;
-        }
-        _inputHandler.OnCameraRotInput += _cameraController.Rotate;
+        //if (_cameraController == null)
+        //{
+        //    Debug.LogError("VCameraController is not assigned in PlayScene.");
+        //    return;
+        //}
+        //_inputHandler.OnCameraRotInput += _cameraController.Rotate;
 
         _hero.Initialize();
+        _dialogueSystem.Initialize();
     }
 
     void OnMoveInput(Vector3 inputVector)
@@ -45,5 +49,11 @@ public class PlayScene : MonoBehaviour
     void OnAttackInput()
     {
         _hero.Attack();
+    }
+
+    void OnInteractInput()
+    {
+        _hero.ExecuteInteraction();
+        Debug.Log("상호작용 입력받음");
     }
 }

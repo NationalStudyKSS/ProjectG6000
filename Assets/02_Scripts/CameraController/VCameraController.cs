@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.Cinemachine;
 using UnityEngine;
 
 /// <summary>
@@ -12,7 +11,7 @@ public class VCameraController : CameraController
     [Header("----- 카메라 포커스 -----")]
     [SerializeField] Transform _target;
     [SerializeField] Transform _cameraFocus;
-    [SerializeField] CinemachineCameraOffset _cineCamOffset;
+    //[SerializeField] CinemachineCameraOffset _cineCamOffset;
 
     [Header("----- 카메라 회전 -----")]
     [Tooltip("x축 회전 민감도")]
@@ -52,13 +51,13 @@ public class VCameraController : CameraController
         _pitch = Mathf.Clamp(_pitch, _minPitch, _maxPitch);
 
         Quaternion targetRotation = Quaternion.Euler(_pitch, _yaw, 0);
-        _cameraFocus.rotation = Quaternion.Slerp(_cameraFocus.rotation, targetRotation, _rotSpeed * Time.deltaTime);
+        _cameraFocus.rotation = Quaternion.Slerp(_cameraFocus.rotation, targetRotation, _rotSpeed*Time.deltaTime);
     }
 
     public override void Zoom(float zoomInput)
     {
-        _cineCamOffset.Offset.z += zoomInput * _zoomSpeed;
-        _cineCamOffset.Offset.z = Mathf.Clamp(_cineCamOffset.Offset.z,
-            _minZoom, _maxZoom);
+        //_cineCamOffset.m_Offset.z += zoomInput * _zoomSpeed;
+        //_cineCamOffset.m_Offset.z = Mathf.Clamp(_cineCamOffset.m_Offset.z,
+        //    _minZoom, _maxZoom);
     }
 }

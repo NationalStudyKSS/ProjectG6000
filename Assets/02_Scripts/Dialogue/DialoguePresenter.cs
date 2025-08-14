@@ -36,6 +36,7 @@ public class DialoguePresenter : MonoBehaviour
 
         _lineIndex = 0;
         _view.SetNameText(string.Empty);
+        Debug.Log("대화 창 띄움");
 
         PlayCurrentLine();
     }
@@ -46,6 +47,7 @@ public class DialoguePresenter : MonoBehaviour
     public void Stop()
     {
         _view.gameObject.SetActive(false);
+        Debug.Log("대화 창 닫음");
         _model.InvokeEnded();
         OnEnded?.Invoke();
     }

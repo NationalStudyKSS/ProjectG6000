@@ -10,6 +10,7 @@ public class PlayerInputHandler : InputHandler
     public override event Action<Vector3> OnMoveInput;
     public override event Action<Vector2> OnCameraRotInput;
     public override event Action OnAttackInput;
+    public override event Action OnInteractInput;
 
     Vector3 _moveInput;
     Vector2 _cameraRotInput;
@@ -37,6 +38,16 @@ public class PlayerInputHandler : InputHandler
     void OnLook(InputValue inputValue)
     {
         _cameraRotInput = inputValue.Get<Vector2>();
+    }
+
+    /// <summary>
+    /// Player Input으로부터 상호작용 키를 입력받는 함수
+    /// </summary>
+    /// <param name="inputValue"></param>
+    void OnInteract(InputValue inputValue)
+    {
+        OnInteractInput?.Invoke();
+        Debug.Log("상호작용 키 눌림!");
     }
 
     private void FixedUpdate()

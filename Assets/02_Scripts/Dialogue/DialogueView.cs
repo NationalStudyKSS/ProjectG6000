@@ -30,6 +30,7 @@ public class DialogueView : MonoBehaviour
 
         // 코루틴 재생
         _speechRoutine = StartCoroutine(SpeechRoutine());
+        Debug.Log("대사 출력 시작");
     }
 
     /// <summary>
@@ -46,6 +47,7 @@ public class DialogueView : MonoBehaviour
 
         _isPlaying = false;
         _speechText.text = _speech;
+        Debug.Log("대사 출력 끝");
     }
 
     /// <summary>
