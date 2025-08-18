@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: Npc1_QuestDone
   _priority: 2
-  _requiredFlag: Npc1_Quest2
+  _requiredFlag: Flag_Npc1_QuestDone
   _hiddenFlag: 
   _content: "\uC774\uB984#\uC5D8\uB9B0\n\uBAA8\uD5D8\uAC00!! \uC815\uB9D0 \uACE0\uB9C8\uC6CC.\n\uB355\uBD84\uC5D0
-    \uB9C8\uC744\uC758 \uACE8\uCE6B\uAC70\uB9AC\uB97C \uD574\uACB0\uD560 \uC218 \uC788\uC5C8\uC5B4.\n\uD50C\uB798\uADF8\uC628#Npc1_Greeting1\n\n"
+    \uB9C8\uC744\uC758 \uACE8\uCE6B\uAC70\uB9AC\uB97C \uD574\uACB0\uD560 \uC218 \uC788\uC5C8\uC5B4.\n\uD50C\uB798\uADF8\uC628#Flag_Npc1_Greeting1\n\uD50C\uB798\uADF8\uC624\uD504#Flag_Npc1_QuestDone\n"
