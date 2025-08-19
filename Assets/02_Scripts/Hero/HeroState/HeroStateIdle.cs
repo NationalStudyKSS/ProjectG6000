@@ -1,0 +1,26 @@
+﻿using UnityEngine;
+
+public class HeroStateIdle : HeroState
+{
+    public HeroStateIdle(Hero hero, HeroStateMachine stateMachine) : base(hero)
+    {
+
+    }
+
+    public override HeroStateType StateType => HeroStateType.Idle;
+
+    public override void Enter()
+    {
+        
+    }
+
+    public override void Exit()
+    {
+        
+    }
+
+    public override void Update()
+    {
+        
+    }
+}

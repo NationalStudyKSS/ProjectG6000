@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Hero : MonoBehaviour
@@ -8,17 +9,37 @@ public class Hero : MonoBehaviour
     [SerializeField] InteractableDetector _interactableDetector;
     [SerializeField] HeroStatusView _statusView;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    HeroStateMachine _stateMachine;
+
+    Dictionary<HeroStateType, HeroState> _states = new();
+
+    public Mover Mover => _mover;
+    public HeroAnimator Animator => _animator;
+    public InteractableDetector InteractableDetector => _interactableDetector;
+    public HeroStatusView StatusView => _statusView;
+
     public void Initialize()
     {
         _mover.OnMoved += OnMoved;
         _interactableDetector.OnDetected += OnInteractableDetected;
         _interactableDetector.OnMissed += OnInteractableMissed;
+
+        _stateMachine = new HeroStateMachine(this);
+    }
+
+    public void Update()
+    {
+        _stateMachine.UpdateState();
     }
 
     public void Move(Vector3 direction)
     {
         _mover.Move(direction);
+    }
+
+    public void Stop()
+    {
+        _mover.Move(Vector3.zero);
     }
 
     void OnMoved(Vector3 velocity)

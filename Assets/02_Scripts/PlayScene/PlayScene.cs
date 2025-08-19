@@ -6,13 +6,18 @@ public class PlayScene : MonoBehaviour
     [SerializeField] InputHandler _inputHandler;
     [SerializeField] DialogueSystem _dialogueSystem;
 
+    bool _isPlaying = false;
+
     //[SerializeField] CameraController _cameraController;
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
         _inputHandler.OnMoveInput += OnMoveInput;
         _inputHandler.OnAttackInput += OnAttackInput;
         _inputHandler.OnInteractInput += OnInteractInput;
+        _dialogueSystem.OnToggled += OnInteractToggled;
 
         //if (_cameraController == null)
         //{
@@ -27,6 +32,12 @@ public class PlayScene : MonoBehaviour
 
     void OnMoveInput(Vector3 inputVector)
     {
+        if (_isPlaying)
+        {
+            _hero.Stop();
+            return;
+        }
+
         // 카메라의 전방 방향
         Vector3 camForward = Camera.main.transform.forward;
         // 카메라의 우측 방향
@@ -48,6 +59,7 @@ public class PlayScene : MonoBehaviour
 
     void OnAttackInput()
     {
+        if (_isPlaying) return;
         _hero.Attack();
     }
 
@@ -55,5 +67,11 @@ public class PlayScene : MonoBehaviour
     {
         _hero.ExecuteInteraction();
         Debug.Log("상호작용 입력받음");
+    }
+
+    void OnInteractToggled(bool isPlaying)
+    {
+        _isPlaying = isPlaying;
+        Cursor.lockState = isPlaying ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
