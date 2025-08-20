@@ -1,6 +1,8 @@
-public class HeroStateAttack : HeroState
+using UnityEngine;
+
+public class HeroStateAttack2 : HeroState
 {
-    public HeroStateAttack(Hero hero, HeroStateMachine stateMachine) : base(hero)
+    public HeroStateAttack2(Hero hero, HeroStateMachine stateMachine) : base(hero, stateMachine)
     {
     }
 

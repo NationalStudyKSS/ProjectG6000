@@ -6,11 +6,24 @@ using UnityEngine;
 public class HeroStateMachine
 {
     Hero _hero;
+    
+    HeroStateIdle _idleState;
+    HeroStateAttack1 _attackState;
+    HeroStateMove _moveState;
+
     HeroState _currentState;
 
     public HeroStateMachine(Hero hero)
     {
         _hero = hero;
+
+        // 상태 객체 생성
+        _idleState = new HeroStateIdle(_hero, this);
+        _attackState = new HeroStateAttack1(_hero, this);
+        _moveState = new HeroStateMove(_hero, this);
+
+        // 상태 초기화
+        _currentState = _idleState;
     }
 
     public void ChangeState(HeroState newState)
