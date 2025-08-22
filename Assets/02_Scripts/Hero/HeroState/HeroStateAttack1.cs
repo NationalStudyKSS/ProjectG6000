@@ -1,14 +1,17 @@
 public class HeroStateAttack1 : HeroState
 {
+    float _timer;
+
     public HeroStateAttack1(Hero hero, HeroStateMachine stateMachine) : base(hero)
     {
+
     }
 
     public override HeroStateType StateType => HeroStateType.Attack;
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        _hero.Animator.OnAttack1();
     }
 
     public override void Exit()

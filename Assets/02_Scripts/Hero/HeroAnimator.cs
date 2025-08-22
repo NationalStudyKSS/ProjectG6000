@@ -20,8 +20,18 @@ public class HeroAnimator : MonoBehaviour
         _animator.SetFloat("MoveSpeed", _velocity.magnitude);
     }
 
-    public void OnAttack()
+    public void OnAttack1()
     {
-        _animator.SetTrigger("OnAttack");
+        _animator.SetTrigger("Attack1");
+    }
+
+    public void OnAttack2()
+    {
+        _animator.SetTrigger("Attack2");
+    }
+
+    public void OnAttack3()
+    {
+        _animator.SetTrigger("Attack3");
     }
 }

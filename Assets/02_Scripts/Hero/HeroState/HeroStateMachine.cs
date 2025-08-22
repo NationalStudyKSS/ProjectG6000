@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ¿µ¿õÀÇ »óÅÂ¸Ó½ÅÀ» ´ã´çÇÏ´Â Å¬·¡½º
+/// ì˜ì›…ì˜ ìƒíƒœë¨¸ì‹ ì„ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤
 /// </summary>
 public class HeroStateMachine
 {
@@ -17,12 +17,12 @@ public class HeroStateMachine
     {
         _hero = hero;
 
-        // »óÅÂ °´Ã¼ »ı¼º
+        // ìƒíƒœ ê°ì²´ ìƒì„±
         _idleState = new HeroStateIdle(_hero, this);
         _attackState = new HeroStateAttack1(_hero, this);
         _moveState = new HeroStateMove(_hero, this);
 
-        // »óÅÂ ÃÊ±âÈ­
+        // ìƒíƒœ ì´ˆê¸°í™”
         _currentState = _idleState;
     }
 

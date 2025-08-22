@@ -49,7 +49,7 @@ public class Hero : MonoBehaviour
 
     public void Attack()
     {
-        _animator.OnAttack();
+        _stateMachine.ChangeState(_states[HeroStateType.Attack]);
     }
 
     /// <summary>
