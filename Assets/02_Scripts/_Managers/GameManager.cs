@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] PoolManager _poolManager;
     public PoolManager PoolManager => _poolManager;
+
+    // ----- Level System Events ----- //
+    public static event Action<int> OnLevelUp;           // 레벨업 시 발생하는 이벤트
+    public static event Action<float> OnExperienceGained; // 경험치 획득 시 발생하는 이벤트
 
     /// <summary>
     /// GameManager의 싱글톤 객체(인스턴스)
@@ -101,7 +106,45 @@ public class GameManager : MonoBehaviour
         {
             Save();
         }
+        
+        // 임시로 경험치 테스트 (Alpha1 키)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GiveExperience(50f);
+        }
     }
+
+    // ----- Experience Management ----- //
+    
+    /// <summary>
+    /// 경험치를 주고 레벨업 처리를 하는 함수
+    /// </summary>
+    /// <param name="expAmount">획득할 경험치</param>
+    public void GiveExperience(float expAmount)
+    {
+        Debug.Log($"경험치 획득: {expAmount}");
+        OnExperienceGained?.Invoke(expAmount);
+        
+        bool leveledUp = _heroData.AddExperience(expAmount);
+        
+        if (leveledUp)
+        {
+            Debug.Log($"레벨업! 현재 레벨: {_heroData.Level}");
+            OnLevelUp?.Invoke(_heroData.Level);
+        }
+    }
+
+    /// <summary>
+    /// 골드를 주는 함수
+    /// </summary>
+    /// <param name="goldAmount">획득할 골드</param>
+    public void GiveGold(int goldAmount)
+    {
+        _heroData.AddGold(goldAmount);
+        Debug.Log($"골드 획득: {goldAmount}, 총 골드: {_heroData.Gold}");
+    }
+
+    // ----- Save/Load System ----- //
 
     public void Save()
     {

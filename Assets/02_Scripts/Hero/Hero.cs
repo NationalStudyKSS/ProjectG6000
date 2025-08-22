@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    [Header("Hero²¨")]
+    [Header("Heroï¿½ï¿½")]
     [SerializeField] Mover _mover;
     [SerializeField] HeroAnimator _animator;
     [SerializeField] InteractableDetector _interactableDetector;
@@ -17,6 +17,7 @@ public class Hero : MonoBehaviour
     public HeroAnimator Animator => _animator;
     public InteractableDetector InteractableDetector => _interactableDetector;
     public HeroStatusView StatusView => _statusView;
+    public HeroStateMachine StateMachine => _stateMachine;
 
     public void Initialize()
     {
@@ -49,11 +50,15 @@ public class Hero : MonoBehaviour
 
     public void Attack()
     {
-        _animator.OnAttack();
+        // Only allow attack if not already attacking
+        if (_stateMachine.CurrentState.StateType != HeroStateType.Attack)
+        {
+            _stateMachine.ChangeState(_stateMachine.AttackState);
+        }
     }
 
     /// <summary>
-    /// IInteractableÀ» °¨ÁöÇßÀ» ¶§ ÀÚµ¿À¸·Î È£ÃâµÇ´Â ÇÔ¼ö
+    /// IInteractableï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ ï¿½Ô¼ï¿½
     /// </summary>
     /// <param name="interactable"></param>
     void OnInteractableDetected(IInteractable interactable)
@@ -62,7 +67,7 @@ public class Hero : MonoBehaviour
     }
 
     /// <summary>
-    /// IInteractable °¨Áö¸¦ ½ÇÆÐÇßÀ» ¶§ ÀÚµ¿À¸·Î È£ÃâµÇ´Â ÇÔ¼ö
+    /// IInteractable ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ ï¿½Ô¼ï¿½
     /// </summary>
     void OnInteractableMissed()
     {
@@ -70,11 +75,11 @@ public class Hero : MonoBehaviour
     }
 
     /// <summary>
-    /// »óÈ£ÀÛ¿ëÀ» ¼öÇàÇÏ´Â ÇÔ¼ö
+    /// ï¿½ï¿½È£ï¿½Û¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
     /// </summary>
     public void ExecuteInteraction()
     {
         _interactableDetector.ExecuteInteraction();
-        Debug.Log("»óÈ£ÀÛ¿ë ½Ç½Ã");
+        Debug.Log("ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½Ç½ï¿½");
     }
 }

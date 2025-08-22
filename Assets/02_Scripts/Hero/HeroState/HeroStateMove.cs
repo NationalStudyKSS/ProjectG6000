@@ -4,7 +4,7 @@ public class HeroStateMove : HeroState
 {
     
 
-    public HeroStateMove(Hero hero, HeroStateMachine stateMachine) : base(hero)
+    public HeroStateMove(Hero hero, HeroStateMachine stateMachine) : base(hero, stateMachine)
     {
         
     }
@@ -23,6 +23,8 @@ public class HeroStateMove : HeroState
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        // Movement is handled by the input system and Hero.Move() 
+        // This state just maintains the movement state
+        // Transition back to Idle when movement stops is handled by input system
     }
 }
