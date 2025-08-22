@@ -303,6 +303,9 @@ public class Enemy : MonoBehaviour
         // 경험치 보상 지급
         GameManager.Instance.GiveExperience(_experienceReward);
         
+        // 퀘스트 시스템에 적 처치 알림
+        GameManager.Instance.QuestManager?.OnEnemyKilled("Enemy");
+        
         // 적 사망 사운드 재생
         GameManager.Instance.AudioManager?.PlaySfx("EnemyDeath");
 

@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioManager _audioManager;
     public AudioManager AudioManager => _audioManager;
 
+    [SerializeField] QuestManager _questManager;
+    public QuestManager QuestManager => _questManager;
+
     // ----- Level System Events ----- //
     public static event Action<int> OnLevelUp;           // 레벨업 시 발생하는 이벤트
     public static event Action<float> OnExperienceGained; // 경험치 획득 시 발생하는 이벤트
@@ -104,12 +107,23 @@ public class GameManager : MonoBehaviour
             _audioManager = gameObject.AddComponent<AudioManager>();
         }
 
+        // QuestManager 컴포넌트 가져오기
+        _questManager = GetComponent<QuestManager>();
+        // QuestManager 컴포넌트가 없으면
+        if (_questManager == null)
+        {
+            // QuestManager 추가
+            _questManager = gameObject.AddComponent<QuestManager>();
+        }
+
         // ResourceManager 초기화
         _resourceManager.Initialze();
         // PoolManager 초기화
         _poolManager.Initialze(_resourceManager);
         // AudioManager 초기화
         _audioManager.Initialize();
+        // QuestManager 초기화
+        _questManager.Initialize();
     }
 
     // ----- 임시 세이브/로드 ----- //
@@ -145,6 +159,20 @@ public class GameManager : MonoBehaviour
         {
             _audioManager?.PlayNextMusic();
         }
+        
+        // 임시로 퀘스트 테스트 (Alpha6-8 키)
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            _questManager?.StartQuest("kill_enemies_001");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            _questManager?.StartQuest("level_up_001");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            _questManager?.StartQuest("collect_gold_001");
+        }
     }
 
     // ----- Experience Management ----- //
@@ -169,6 +197,9 @@ public class GameManager : MonoBehaviour
             // 레벨업 사운드 재생
             _audioManager?.PlaySfx("LevelUp");
             OnLevelUp?.Invoke(_heroData.Level);
+            
+            // 퀘스트 시스템에 레벨업 알림
+            _questManager?.OnLevelUp(_heroData.Level);
         }
     }
 
@@ -180,6 +211,9 @@ public class GameManager : MonoBehaviour
     {
         _heroData.AddGold(goldAmount);
         Debug.Log($"골드 획득: {goldAmount}, 총 골드: {_heroData.Gold}");
+        
+        // 퀘스트 시스템에 골드 변경 알림
+        _questManager?.OnGoldChanged(_heroData.Gold);
     }
 
     // ----- Save/Load System ----- //
