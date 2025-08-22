@@ -302,6 +302,9 @@ public class Enemy : MonoBehaviour
 
         // 경험치 보상 지급
         GameManager.Instance.GiveExperience(_experienceReward);
+        
+        // 적 사망 사운드 재생
+        GameManager.Instance.AudioManager?.PlaySfx("EnemyDeath");
 
         // 사망 상태로 변경
         ChangeState(EnemyStateType.Dead);

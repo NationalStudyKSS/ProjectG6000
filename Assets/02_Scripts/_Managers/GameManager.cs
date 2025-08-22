@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] PoolManager _poolManager;
     public PoolManager PoolManager => _poolManager;
 
+    [SerializeField] AudioManager _audioManager;
+    public AudioManager AudioManager => _audioManager;
+
     // ----- Level System Events ----- //
     public static event Action<int> OnLevelUp;           // 레벨업 시 발생하는 이벤트
     public static event Action<float> OnExperienceGained; // 경험치 획득 시 발생하는 이벤트
@@ -91,10 +94,22 @@ public class GameManager : MonoBehaviour
             // PoolManager 추가
             _poolManager = gameObject.AddComponent<PoolManager>();
         }
+
+        // AudioManager 컴포넌트 가져오기
+        _audioManager = GetComponent<AudioManager>();
+        // AudioManager 컴포넌트가 없으면
+        if (_audioManager == null)
+        {
+            // AudioManager 추가
+            _audioManager = gameObject.AddComponent<AudioManager>();
+        }
+
         // ResourceManager 초기화
         _resourceManager.Initialze();
         // PoolManager 초기화
         _poolManager.Initialze(_resourceManager);
+        // AudioManager 초기화
+        _audioManager.Initialize();
     }
 
     // ----- 임시 세이브/로드 ----- //
@@ -112,6 +127,24 @@ public class GameManager : MonoBehaviour
         {
             GiveExperience(50f);
         }
+        
+        // 임시로 오디오 테스트 (Alpha2-5 키)
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _audioManager?.PlayMusic("BackgroundMusic1");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _audioManager?.PlaySfx("TestSound");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            _audioManager?.StopMusic();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            _audioManager?.PlayNextMusic();
+        }
     }
 
     // ----- Experience Management ----- //
@@ -125,11 +158,16 @@ public class GameManager : MonoBehaviour
         Debug.Log($"경험치 획득: {expAmount}");
         OnExperienceGained?.Invoke(expAmount);
         
+        // 경험치 획득 사운드 재생
+        _audioManager?.PlaySfx("ExpGain");
+        
         bool leveledUp = _heroData.AddExperience(expAmount);
         
         if (leveledUp)
         {
             Debug.Log($"레벨업! 현재 레벨: {_heroData.Level}");
+            // 레벨업 사운드 재생
+            _audioManager?.PlaySfx("LevelUp");
             OnLevelUp?.Invoke(_heroData.Level);
         }
     }

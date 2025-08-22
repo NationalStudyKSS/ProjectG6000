@@ -14,6 +14,9 @@ public class HeroStateAttack3 : HeroState
         _attackTimer = 0f;
         _hero.Stop(); // Stop movement during attack
         _hero.Animator.OnAttack(); // Trigger attack animation
+        
+        // Play attack sound effect
+        GameManager.Instance.AudioManager?.PlaySfx("Attack3");
     }
 
     public override void Exit()
