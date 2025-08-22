@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// ¿µ¿õÀÇ »óÅÂ¸Ó½ÅÀ» ´ã´çÇÏ´Â Å¬·¡½º
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸Ó½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public class HeroStateMachine
 {
@@ -13,16 +13,22 @@ public class HeroStateMachine
 
     HeroState _currentState;
 
+    // Property accessors for states
+    public HeroStateIdle IdleState => _idleState;
+    public HeroStateAttack1 AttackState => _attackState;
+    public HeroStateMove MoveState => _moveState;
+    public HeroState CurrentState => _currentState;
+
     public HeroStateMachine(Hero hero)
     {
         _hero = hero;
 
-        // »óÅÂ °´Ã¼ »ý¼º
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
         _idleState = new HeroStateIdle(_hero, this);
         _attackState = new HeroStateAttack1(_hero, this);
         _moveState = new HeroStateMove(_hero, this);
 
-        // »óÅÂ ÃÊ±âÈ­
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         _currentState = _idleState;
     }
 

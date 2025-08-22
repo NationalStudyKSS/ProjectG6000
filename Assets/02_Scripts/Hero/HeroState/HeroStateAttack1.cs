@@ -1,6 +1,9 @@
 public class HeroStateAttack1 : HeroState
 {
-    public HeroStateAttack1(Hero hero, HeroStateMachine stateMachine) : base(hero)
+    float _attackTimer = 0f;
+    const float _attackDuration = 0.8f; // Attack animation duration
+
+    public HeroStateAttack1(Hero hero, HeroStateMachine stateMachine) : base(hero, stateMachine)
     {
     }
 
@@ -8,16 +11,24 @@ public class HeroStateAttack1 : HeroState
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        _attackTimer = 0f;
+        _hero.Stop(); // Stop movement during attack
+        _hero.Animator.OnAttack(); // Trigger attack animation
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+        _attackTimer = 0f;
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        _attackTimer += UnityEngine.Time.deltaTime;
+        
+        // Return to idle state after attack animation duration
+        if (_attackTimer >= _attackDuration)
+        {
+            _stateMachine.ChangeState(_stateMachine.IdleState);
+        }
     }
 }

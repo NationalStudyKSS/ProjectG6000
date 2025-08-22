@@ -2,7 +2,7 @@
 
 public class HeroStateIdle : HeroState
 {
-    public HeroStateIdle(Hero hero, HeroStateMachine stateMachine) : base(hero)
+    public HeroStateIdle(Hero hero, HeroStateMachine stateMachine) : base(hero, stateMachine)
     {
 
     }
