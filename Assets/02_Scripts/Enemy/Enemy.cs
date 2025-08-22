@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float _attackSpan;             // 공격 간격(초)
     [SerializeField] float _rotAngleThreshhold;     // 회전 각도 임계값
     [SerializeField] float _deadDuration;               // 사망 애니메이션 재생 시간
+    [SerializeField] float _experienceReward = 25f;     // 처치 시 주는 경험치
 
     /// <summary>
     /// 적 제거 이벤트 변수
@@ -298,6 +299,9 @@ public class Enemy : MonoBehaviour
 
         // 콜라이더 컴포넌트 Off
         _collider.enabled = false;
+
+        // 경험치 보상 지급
+        GameManager.Instance.GiveExperience(_experienceReward);
 
         // 사망 상태로 변경
         ChangeState(EnemyStateType.Dead);
