@@ -4,7 +4,9 @@ public enum HeroStateType
 {
     Idle,
     Move,
-    Attack,
+    Attack1,
+    Attack2,
+    Attack3,
     Jump,
     Dodge,
     Dead,
@@ -33,11 +35,7 @@ public abstract class HeroState
         _hero = hero;
         _stateMachine = stateMachine;
     }
-
-    protected HeroState(Hero hero)
-    {
-        _hero = hero;
-    }
+    
 
     /// <summary>
     /// 상태 진입 시 호출되는 함수

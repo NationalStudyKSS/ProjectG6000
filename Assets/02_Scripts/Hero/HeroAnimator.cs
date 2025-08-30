@@ -25,9 +25,19 @@ public class HeroAnimator : MonoBehaviour
         _animator.SetTrigger("Attack1");
     }
 
+    public void ResetAttack2()
+    {
+        _animator.ResetTrigger("Attack2");
+    }
+
     public void OnAttack2()
     {
         _animator.SetTrigger("Attack2");
+    }
+
+    public void ResetAttack3()
+    {
+        _animator.ResetTrigger("Attack3");
     }
 
     public void OnAttack3()

@@ -60,7 +60,7 @@ public class PlayScene : MonoBehaviour
     void OnAttackInput()
     {
         if (_isPlaying) return;
-        _hero.Attack();
+        _hero.OnAttackInput();
     }
 
     void OnInteractInput()

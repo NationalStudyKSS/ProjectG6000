@@ -4,7 +4,7 @@ public class HeroStateMove : HeroState
 {
     
 
-    public HeroStateMove(Hero hero, HeroStateMachine stateMachine) : base(hero)
+    public HeroStateMove(Hero hero, HeroStateMachine stateMachine) : base(hero, stateMachine)
     {
         
     }

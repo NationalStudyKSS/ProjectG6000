@@ -1,20 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ÁÖÀÎ°ø Ä³¸¯ÅÍ UI ´ã´ç
+/// ì£¼ì¸ê³µ ìºë¦­í„° UI ë‹´ë‹¹
 /// </summary>
 public class HeroStatusView : MonoBehaviour
 {
-    [Header("----- ÄÄÆ÷³ÍÆ® ÂüÁ¶ -----")]
-    [SerializeField] RectTransform _canvasRt;           // Äµ¹ö½º ·ºÆ® Æ®·£½ºÆû
+    [Header("----- ì»´í¬ë„ŒíŠ¸ ì°¸ì¡° -----")]
+    [SerializeField] RectTransform _canvasRt;           // ìº”ë²„ìŠ¤ ë ‰íŠ¸ íŠ¸ëœìŠ¤í¼
     [SerializeField] Image _hpBar;
     [SerializeField] Image _mpBar;
     [SerializeField] TextMeshProUGUI _heroNameText;
-    [SerializeField] RectTransform _interactionGuideRt; // »óÈ£ÀÛ¿ë °¡ÀÌµå ·ºÆ® Æ®·£½ºÆû
+    [SerializeField] RectTransform _interactionGuideRt; // ìƒí˜¸ì‘ìš© ê°€ì´ë“œ ë ‰íŠ¸ íŠ¸ëœìŠ¤í¼
 
     public void SetHpBar(float currentHp, float maxHp)
     {
@@ -32,23 +32,23 @@ public class HeroStatusView : MonoBehaviour
     }
 
     /// <summary>
-    /// »óÈ£ÀÛ¿ë °¡ÀÌµå UI¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼ö
+    /// ìƒí˜¸ì‘ìš© ê°€ì´ë“œ UIë¥¼ ì„¤ì •í•˜ëŠ” í•¨ìˆ˜
     /// </summary>
-    /// <param name="isActive">°¡ÀÌµå Ç¥½Ã ¿©ºÎ</param>
-    /// <param name="worldPos">°¡ÀÌµå Ç¥½ÃÇÒ ¿ùµå ÁÂÇ¥</param>
+    /// <param name="isActive">ê°€ì´ë“œ í‘œì‹œ ì—¬ë¶€</param>
+    /// <param name="worldPos">ê°€ì´ë“œ í‘œì‹œí•  ì›”ë“œ ì¢Œí‘œ</param>
     public void SetInetractionGuide(bool isActive, Vector3 worldPos)
     {
-        // »óÈ£ÀÛ¿ë °¡ÀÌµå ¿Â¿ÀÇÁ
+        // ìƒí˜¸ì‘ìš© ê°€ì´ë“œ ì˜¨ì˜¤í”„
         _interactionGuideRt.gameObject.SetActive(isActive);
         if (isActive == false) return;
 
-        // ¿ùµå ÁÂÇ¥ -> ½ºÅ©¸° ÁÂÇ¥ º¯È¯
+        // ì›”ë“œ ì¢Œí‘œ -> ìŠ¤í¬ë¦° ì¢Œí‘œ ë³€í™˜
         Vector2 screenPoint = Camera.main.WorldToScreenPoint(worldPos);
 
-        // ½ºÅ©¸° ÁÂÇ¥ -> Äµ¹ö½º ·ÎÄÃ ÁÂÇ¥
+        // ìŠ¤í¬ë¦° ì¢Œí‘œ -> ìº”ë²„ìŠ¤ ë¡œì»¬ ì¢Œí‘œ
         RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvasRt, screenPoint, null, out Vector2 localPoint);
 
-        // Äµ¹ö½º ·ÎÄÃ ÁÂÇ¥¸¦ »óÈ£ÀÛ¿ë °¡ÀÌµå¿¡ Àû¿ë
+        // ìº”ë²„ìŠ¤ ë¡œì»¬ ì¢Œí‘œë¥¼ ìƒí˜¸ì‘ìš© ê°€ì´ë“œì— ì ìš©
         _interactionGuideRt.anchoredPosition = localPoint;
 
     }

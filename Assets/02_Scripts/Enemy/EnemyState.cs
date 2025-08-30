@@ -16,9 +16,11 @@ public enum EnemyStateType
 {
     Idle,       // 방치 상태
     Trace,      // 추적 상태
-    Combat,     // 전투 상태
-    Dead,      // 사망 상태
+    Attack,     // 공격 상태
+    Skill,      // 스킬 사용 상태
+    Dead,       // 사망 상태
     Count,      // 상태 종류 수 카운트 용
+    Combat,
 }
 
 /// <summary>
@@ -27,6 +29,8 @@ public enum EnemyStateType
 public abstract class EnemyState
 {
     protected Enemy _enemy;
+    protected EnemyStateMachine _stateMachine;
+    private Enemy enemy;
 
     /// <summary>
     /// 상태 종류를 반환
@@ -37,9 +41,15 @@ public abstract class EnemyState
     /// Enemy 상태 객체 생성자
     /// </summary>
     /// <param name="enemy">상태를 적용할 Enemy 객체(컴포넌트)</param>
-    public EnemyState(Enemy enemy)
+    public EnemyState(Enemy enemy, EnemyStateMachine stateMachine)
     {
         _enemy = enemy;
+        _stateMachine = stateMachine;
+    }
+
+    protected EnemyState(Enemy enemy)
+    {
+        this.enemy = enemy;
     }
 
     /// <summary>
@@ -69,7 +79,7 @@ public class IdleState : EnemyState
 
     public IdleState(Enemy enemy) : base(enemy)
     {
-        
+
     }
 
     public override void Enter()
@@ -168,13 +178,13 @@ public class DeadState : EnemyState
 
     public override void Exit()
     {
-        
+
     }
 
     public override void Update()
     {
         _timer += Time.deltaTime;
-        if(_timer > _enemy.DeadDuration)
+        if (_timer > _enemy.DeadDuration)
         {
             _timer = 0;
             _enemy.Remove();

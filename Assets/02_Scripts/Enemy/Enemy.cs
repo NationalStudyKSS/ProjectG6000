@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] CharacterAnimatorHandler _animatorHandler;
     [SerializeField] DamageableDetector _damageableDetector;
     [SerializeField] EnemyHud _enemyHud;
-    [SerializeField] Collider _collider; 
+    [SerializeField] Collider _collider;
 
     [Header("----- AI -----")]
     [SerializeField] float _thinkSpan;              // AI 판단 간격(초)
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     /// 적 제거 이벤트 변수
     /// </summary>
     public event Action<Enemy> OnRemoved;
-    
+
     /// <summary>
     /// 적 캐릭터 상태 객체들
     /// </summary>
@@ -172,7 +172,7 @@ public class Enemy : MonoBehaviour
 
         // 없는 상태로 바꾸려는 경우 리턴
         int stateIndex = (int)stateType;
-        if(stateIndex < 0 || stateIndex >= _states.Length) return;
+        if (stateIndex < 0 || stateIndex >= _states.Length) return;
 
         // 기존 상태 종료
         _currentState.Exit();
@@ -335,34 +335,3 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _traceDistance);
     }
 }
-
-//private void Update()
-//{
-//    float distance = Vector3.Distance(transform.position, _target.position);
-//    if (distance < _traceDistance)
-//    {
-//        // 배회 루틴이 켜져 있으면
-//        if (_roamRoutine != null)
-//        {
-//            StopCoroutine(_roamRoutine);
-//        }
-//        // 추적 루틴이 꺼져 있으면
-//        if (_traceRoutine == null)
-//        {
-//            _traceRoutine = StartCoroutine(TraceRoutine());
-//        }
-//    }
-//    else
-//    {
-//        // 추적 루틴이 켜져 있으면
-//        if (_traceRoutine != null)
-//        {
-//            StopCoroutine(_traceRoutine);
-//        }
-//        // 배회 루틴이 꺼져 있으면
-//        if (_roamRoutine == null)
-//        {
-//            _roamRoutine = StartCoroutine(RoamRoutine());
-//        }
-//    }
-//}

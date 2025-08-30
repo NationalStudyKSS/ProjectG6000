@@ -2,7 +2,7 @@
 
 public class HeroStateIdle : HeroState
 {
-    public HeroStateIdle(Hero hero, HeroStateMachine stateMachine) : base(hero)
+    public HeroStateIdle(Hero hero, HeroStateMachine stateMachine) : base(hero, stateMachine)
     {
 
     }
@@ -21,6 +21,10 @@ public class HeroStateIdle : HeroState
 
     public override void Update()
     {
-        
+        if (_hero.AttackInput)
+        {
+            _hero.ClearAttackInput();
+            _stateMachine.ChangeState(_stateMachine.States[HeroStateType.Attack1]);
+        }
     }
 }
