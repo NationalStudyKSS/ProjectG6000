@@ -125,13 +125,13 @@ public class EnemySpawner : MonoBehaviour
         enemy.transform.position = GetRandomPos();
 
         // 3. 복제본 초기화
-        enemy.Initialize(_hero.transform);
+        //enemy.Initialize(_hero.transform);
 
         // 4. 복제본을 리스트에 추가
         _enemies.Add(enemy);
         
         // (5. 생성된 복제본 이벤트 구독)
-        enemy.OnRemoved += OnEnemyRemoved; // 적 제거 이벤트 구독
+        //enemy.OnRemoved += OnEnemyRemoved; // 적 제거 이벤트 구독
         // 여기까지가 템플릿임
     }
 

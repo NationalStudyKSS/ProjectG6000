@@ -62,7 +62,7 @@ public class DamageableDetector : MonoBehaviour
     }
 
     /// <summary>
-    /// 감지 지점을 설정하는 함수
+    /// 감지 지점의 중심을 설정하는 함수
     /// </summary>
     /// <param name="detectPoint"></param>
     public void SetDetectPoint(Transform detectPoint)

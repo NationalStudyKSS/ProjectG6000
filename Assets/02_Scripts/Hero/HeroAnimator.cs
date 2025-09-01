@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class HeroAnimator : MonoBehaviour
+public class HeroAnimator : CharacterAnimatorHandler
 {
     Animator _animator;
     Vector3 _velocity;

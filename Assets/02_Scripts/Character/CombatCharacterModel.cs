@@ -26,6 +26,7 @@ public class CombatCharacterModel : MonoBehaviour, IDamageable, IAttackable
 
     public float MoveSpeed => _moveSpeed;
     public float RotSpeed => _rotSpeed;
+    public Transform Transform => transform;
 
     public event Action<float, float> OnHpChanged;
     public event Action Ondead;

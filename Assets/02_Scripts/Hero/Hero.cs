@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
     [Header("Hero꺼")]
+    [SerializeField] HeroModel _model;
     [SerializeField] Mover _mover;
     [SerializeField] HeroAnimator _animator;
     [SerializeField] InteractableDetector _interactableDetector;
@@ -13,6 +15,7 @@ public class Hero : MonoBehaviour
     [SerializeField] HeroStateType _stateType;
 
     bool _attackInput;          // 공격 가능한지 여부에 대한 토큰(이게 있어야 공격 머신에 동전을 넣을수 있음)
+
 
     public Mover Mover => _mover;
     public HeroAnimator Animator => _animator;

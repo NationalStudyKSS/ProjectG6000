@@ -15630,11 +15630,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8079009184771636040, guid: 84425e7540295794787396b9a068a82c, type: 3}
   m_PrefabInstance: {fileID: 917451161}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &487890578 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6739180917586322837, guid: 84425e7540295794787396b9a068a82c, type: 3}
-  m_PrefabInstance: {fileID: 917451161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!64 &487890580
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15725,41 +15720,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd315cccbb7de9458b1de76e96a73d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatCharacterModel
-  _moveSpeed: 0
-  _rotSpeed: 0
+  _moveSpeed: 5
+  _rotSpeed: 360
   _dashRate: 0
   _maxHp: 0
   _currentHp: 0
   _armor: 0
   _damage: 0
---- !u!114 &487890585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 487890574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb26b7a9753c19941b0fd6f5b09fb8c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  _navAgent: {fileID: 487890586}
-  _model: {fileID: 487890584}
-  _target: {fileID: 2068015367}
-  _animator: {fileID: 487890578}
-  _animatorHandler: {fileID: 487890583}
-  _damageableDetector: {fileID: 0}
-  _enemyHud: {fileID: 0}
-  _collider: {fileID: 0}
-  _thinkSpan: 0
-  _roamDistance: 0
-  _roamSpan: 0
-  _traceDistance: 0
-  _attackDistance: 0
-  _attackSpan: 0
-  _rotAngleThreshhold: 0
-  _deadDuration: 0
 --- !u!195 &487890586
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -15782,6 +15749,80 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &487890587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487890574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec19f735c8c9b140aefce26bf1ef9e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
+  _animator: {fileID: 487890590}
+--- !u!114 &487890588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487890574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ed7125d1bf8984f87d515f42066739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyModel
+  _moveSpeed: 5
+  _rotSpeed: 360
+  _dashRate: 0
+  _maxHp: 0
+  _currentHp: 0
+  _armor: 0
+  _damage: 0
+--- !u!114 &487890589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487890574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315e684e9c60a7d43b67ff2a7c850b50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RigidbodyMover
+  _moveSpeed: 0
+  _rotSpeed: 0
+--- !u!95 &487890590 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6739180917586322837, guid: 84425e7540295794787396b9a068a82c, type: 3}
+  m_PrefabInstance: {fileID: 917451161}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &487890592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487890574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e506438433e45fb4bbec7c393d2ab950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Boss
+  _model: {fileID: 487890588}
+  _mover: {fileID: 487890589}
+  _damageableDetector: {fileID: 487890582}
+  _animator: {fileID: 487890587}
+  _navMeshAgent: {fileID: 487890586}
+  _rigidbody: {fileID: 487890581}
+  _attackRange: 2
+  _detectRange: 10
+  _target: {fileID: 0}
+  _isUsingSkill: 0
+  _isDetecting: 0
 --- !u!1001 &488395121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27562,6 +27603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hero: {fileID: 2068015371}
+  _enemy: {fileID: 487890592}
   _inputHandler: {fileID: 456958201}
   _dialogueSystem: {fileID: 621567083}
 --- !u!4 &893470096 stripped
@@ -28757,7 +28799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079009184771636040, guid: 84425e7540295794787396b9a068a82c, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28774,7 +28816,7 @@ PrefabInstance:
       addedObject: {fileID: 487890586}
     - targetCorrespondingSourceObject: {fileID: 8079009184771636040, guid: 84425e7540295794787396b9a068a82c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 487890585}
+      addedObject: {fileID: 487890592}
     - targetCorrespondingSourceObject: {fileID: 8079009184771636040, guid: 84425e7540295794787396b9a068a82c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 487890584}
@@ -28784,6 +28826,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8079009184771636040, guid: 84425e7540295794787396b9a068a82c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 487890582}
+    - targetCorrespondingSourceObject: {fileID: 8079009184771636040, guid: 84425e7540295794787396b9a068a82c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 487890589}
+    - targetCorrespondingSourceObject: {fileID: 8079009184771636040, guid: 84425e7540295794787396b9a068a82c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 487890588}
+    - targetCorrespondingSourceObject: {fileID: 8079009184771636040, guid: 84425e7540295794787396b9a068a82c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 487890587}
   m_SourcePrefab: {fileID: 100100000, guid: 84425e7540295794787396b9a068a82c, type: 3}
 --- !u!1001 &920471857
 PrefabInstance:
@@ -64520,9 +64571,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2068015367}
   - component: {fileID: 2068015371}
-  - component: {fileID: 2068015368}
-  - component: {fileID: 2068015369}
-  - component: {fileID: 2068015370}
+  - component: {fileID: 2068015372}
+  - component: {fileID: 2068015373}
+  - component: {fileID: 2068015374}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -64548,7 +64599,7 @@ Transform:
   - {fileID: 91443519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2068015368
+--- !u!114 &2068015371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64557,40 +64608,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2068015366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315e684e9c60a7d43b67ff2a7c850b50, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d64381204fb774449338ade4bd61224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _rotSpeed: 360
---- !u!54 &2068015369
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068015366}
-  serializedVersion: 5
-  m_Mass: 20
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 1
---- !u!136 &2068015370
-CapsuleCollider:
+  _model: {fileID: 2068015374}
+  _mover: {fileID: 2068015373}
+  _animator: {fileID: 5992799435509323780}
+  _interactableDetector: {fileID: 5075717}
+  _statusView: {fileID: 626131566}
+  _stateType: 0
+--- !u!143 &2068015372
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -64604,15 +64632,17 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
+  m_Height: 1.6
   m_Radius: 0.3
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &2068015371
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &2068015373
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64621,14 +64651,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 2068015366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d64381204fb774449338ade4bd61224, type: 3}
+  m_Script: {fileID: 11500000, guid: 64e09be5435478543a77a223bb892bf5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  _mover: {fileID: 2068015368}
-  _animator: {fileID: 5992799435509323780}
-  _interactableDetector: {fileID: 5075717}
-  _statusView: {fileID: 626131566}
-  _stateType: 0
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterControllerMover
+  _moveSpeed: 5
+  _rotSpeed: 360
+--- !u!114 &2068015374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068015366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65bffc7192d062e4e9b9357affc3375a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeroModel
+  _moveSpeed: 0
+  _rotSpeed: 0
+  _dashRate: 0
+  _maxHp: 0
+  _currentHp: 0
+  _armor: 0
+  _damage: 0
+  _sprintRate: 0
+  _dashSpeed: 0
 --- !u!1001 &2068017915
 PrefabInstance:
   m_ObjectHideFlags: 0

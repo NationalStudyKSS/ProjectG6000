@@ -7,20 +7,24 @@ public class EnemyStateIdle : EnemyState
 
     }
 
-    public override EnemyStateType StatType => EnemyStateType.Idle;
+    public override EnemyStateType StateType => EnemyStateType.Idle;
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("대기 상태 진입");
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        _enemy.IdleBehaviour();
+        if (_enemy.HasDetected)
+        {
+            _stateMachine.ChangeState(EnemyStateType.Combat);
+        }
     }
 }

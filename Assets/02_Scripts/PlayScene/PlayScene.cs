@@ -3,6 +3,7 @@
 public class PlayScene : MonoBehaviour
 {
     [SerializeField] Hero _hero;
+    [SerializeField] Enemy _enemy;
     [SerializeField] InputHandler _inputHandler;
     [SerializeField] DialogueSystem _dialogueSystem;
 
@@ -28,6 +29,8 @@ public class PlayScene : MonoBehaviour
 
         _hero.Initialize();
         _dialogueSystem.Initialize();
+
+        _enemy.Initialize(_hero.transform);
     }
 
     void OnMoveInput(Vector3 inputVector)

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 
-// RigidbodyMover 컴포넌트를 쓰려면 해당 게임오브젝트에 Rigidbody가 반드시 있어야 한다.
-[RequireComponent(typeof(Rigidbody))]
 public class RigidbodyMover : Mover
 {
     public override event Action<Vector3> OnMoved;

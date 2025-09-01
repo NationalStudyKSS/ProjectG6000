@@ -31,6 +31,7 @@ public class HeroStateMachine
         _attackState3 = new HeroStateAttack3(_hero, this);
         _moveState = new HeroStateMove(_hero, this);
 
+        // 딕셔너리에 상태 등록
         _states[HeroStateType.Idle] = _idleState;
         _states[HeroStateType.Attack1] = _attackState1;
         _states[HeroStateType.Attack2] = _attackState2;
