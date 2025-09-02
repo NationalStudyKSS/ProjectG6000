@@ -16,15 +16,11 @@ public class EnemyStateIdle : EnemyState
 
     public override void Exit()
     {
-        
+        Debug.Log("대기 상태 종료");
     }
 
     public override void Update()
     {
-        _enemy.IdleBehaviour();
-        if (_enemy.HasDetected)
-        {
-            _stateMachine.ChangeState(EnemyStateType.Combat);
-        }
+        _enemy.DetectTarget();
     }
 }

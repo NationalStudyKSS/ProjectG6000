@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class EnemyStateCombat : EnemyState
 {
@@ -9,16 +9,28 @@ public class EnemyStateCombat : EnemyState
     }
     public override void Enter()
     {
-        Debug.Log("ÀüÅõ »óÅÂ ÁøÀÔ");
+        Debug.Log("ì „íˆ¬ ìƒíƒœ ì§„ì…");
     }
 
     public override void Update()
     {
-        _enemy.CombatBehaviour();
+        // ë³´ìŠ¤ê°€ ì „íˆ¬ ìƒíƒœì—ì„œ í•´ì•¼í•  í–‰ë™ êµ¬í˜„
+        if (!_enemy.IsAttacking)
+        {
+            if (Vector3.Distance(_enemy.transform.position, _enemy.Target.position) > _enemy.AttackRange)
+            {
+                _stateMachine.ChangeState(EnemyStateType.Trace);
+            }
+
+            else
+            {
+                _enemy.Attack();
+            }
+        }
     }
 
     public override void Exit()
     {
-        Debug.Log("ÀüÅõ »óÅÂ Á¾·á");
+        Debug.Log("ì „íˆ¬ ìƒíƒœ ì¢…ë£Œ");
     }
 }

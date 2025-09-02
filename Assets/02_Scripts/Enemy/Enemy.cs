@@ -27,18 +27,26 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("----- Enemy Stats(Temp) -----")]
     [SerializeField] protected float _detectRange = 10f; // 감지 범위
+    [SerializeField] protected float _attackRange = 2f; // 공격 범위
 
     [Header("----- ReadOnly -----")]
     [SerializeField] protected Transform _target; // 추적 대상
-    [SerializeField] protected bool _hasDetected; // 감지에 성공했는지 여부
+    [SerializeField] protected bool _hasDetected; // 전투할 대상을 감지했는지 여부
+    [SerializeField] protected bool _hasFirstMet; // 최초 조우 여부
+    [SerializeField] protected bool _isAttacking; // 공격 중인지 여부
     [SerializeField] protected EnemyStateType _stateType; // 현재 상태 타입
 
     protected EnemyStateMachine _stateMachine; // 상태 머신
 
-    public EnemyAnimator Animator => _animator;
-    public Transform Target => _target;
     public EnemyModel Model => _model;
-    public bool HasDetected => _hasDetected;    
+    public EnemyAnimator Animator => _animator;
+
+    public float AttackRange => _attackRange;
+
+    public Transform Target => _target;
+    public bool HasDetected => _hasDetected;
+    public bool HasFirstMet => _hasFirstMet;
+    public bool IsAttacking => _isAttacking;
 
     public void FixedUpdate()
     {
@@ -48,34 +56,47 @@ public abstract class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// 초기화 함수
+    /// Enemy 초기화 함수
+    /// 초기화 시 적의 목표 대상을 설정한다.
     /// </summary>
-    /// <param name="target"></param>
+    /// <param name="target">적이 목표로 할 대상</param>
     public void Initialize(Transform target)
     {
         SetTarget(target);
     
         _stateMachine = new EnemyStateMachine(this);
 
+        _model.Initialize();
+
         _mover.SetMoveSpeed(_model.MoveSpeed);
         _mover.SetRotSpeed(_model.RotSpeed);
 
     }
 
-    /// <summary>
-    /// 적이 대기 상태일 때 수행하는 동작
-    /// </summary>
-    public abstract void IdleBehaviour();
+    ///// <summary>
+    ///// 적이 대기 상태일 때 수행하는 동작
+    ///// </summary>
+    //public abstract void IdleBehaviour();
 
-    /// <summary>
-    /// 적이 전투 상태일 때 수행하는 동작
-    /// </summary>
-    public abstract void CombatBehaviour();
+    ///// <summary>
+    ///// 적이 목표를 처음 조우 했을 때 수행하는 동작
+    ///// </summary>
+    //public abstract void FirstMeetBehaviour();
 
-    /// <summary>
-    /// 적이 사망 상태일 때 수행하는 동작
-    /// </summary>
-    public abstract void DeadBehaviour();
+    ///// <summary>
+    ///// 적이 추적 상태일 때 수행하는 동작
+    ///// </summary>
+    //public abstract void TraceBehaviour();
+
+    ///// <summary>
+    ///// 적이 전투 상태일 때 수행하는 동작
+    ///// </summary>
+    //public abstract void CombatBehaviour();
+
+    ///// <summary>
+    ///// 적이 사망 상태일 때 수행하는 동작
+    ///// </summary>
+    //public abstract void DeadBehaviour();
 
     /// <summary>
     /// 목표 대상의 Transform을 설정하는 함수
@@ -87,15 +108,49 @@ public abstract class Enemy : MonoBehaviour
         _target = target;
     }
 
+    public void SetFirstMet()
+    {
+        _hasFirstMet = true;
+    }
+
+    /// <summary>
+    /// 설정된 목표대상과의 거리를 계산하고
+    /// 자신의 감지 범위 이내에 들어오면 플래그를 설정하고 전투 상태로 전환한다.
+    /// 적이 대기 상태일 때 주기적으로 호출한다.
+    /// </summary>
     public void DetectTarget()
     {
+        // 목표 대상과의 거리 계산
         Vector3 distance = _target.position - transform.position;
 
+        // 만약 
         if (!_hasDetected && distance.magnitude <= _detectRange)
         {
             _hasDetected = true;
             Debug.Log("타겟 감지");
-            _stateMachine.ChangeState(EnemyStateType.Combat);
+
+            if (!_hasFirstMet)
+                _stateMachine.ChangeState(EnemyStateType.FirstMeet);  // 첫 만남
+            else
+                _stateMachine.ChangeState(EnemyStateType.Combat);     // 이미 만난 적 있음
         }
+    }
+
+    /// <summary>
+    /// 목표 대상 방향을 향해 이동하며 추적하는 함수
+    /// </summary>
+    public void FollowTarget()
+    {
+        _navMeshAgent.SetDestination(_target.position);
+        Vector3 direction = _navMeshAgent.desiredVelocity.normalized;
+        _mover.Move(direction);
+        _animator.PlayRun(_model.MoveSpeed);
+    }
+
+    public void Attack()
+    {
+        _isAttacking = true;
+        _mover.Move(Vector3.zero); // 제자리에서 공격
+        _animator.PlayAttack();
     }
 }

@@ -15,6 +15,7 @@ using UnityEngine;
 public enum EnemyStateType
 {
     Idle,       // 방치 상태
+    FirstMeet,  // 최초 조우 상태
     Trace,      // 추적 상태
     Combat,     // 전투 상태
     Dead,       // 사망 상태

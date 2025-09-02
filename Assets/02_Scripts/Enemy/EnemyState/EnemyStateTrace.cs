@@ -12,13 +12,22 @@ public class EnemyStateTrace : EnemyState
     {
         
     }
+
     public override void Update()
     {
-        
+        FollowTarget();
+
+        if(_enemy as BossEnemy)?.
+
+        if (Vector3.Distance(transform.position, _target.position) <= _attackRange)
+        {
+            Debug.Log("공격 범위 내 진입");
+            _stateMachine.ChangeState(EnemyStateType.Combat);
+        }
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+        
     }
 }   
