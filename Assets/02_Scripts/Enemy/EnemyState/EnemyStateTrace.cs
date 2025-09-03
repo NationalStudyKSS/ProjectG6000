@@ -10,24 +10,23 @@ public class EnemyStateTrace : EnemyState
 
     public override void Enter()
     {
-        
+
     }
 
     public override void Update()
     {
-        FollowTarget();
-
-        if(_enemy as BossEnemy)?.
-
-        if (Vector3.Distance(transform.position, _target.position) <= _attackRange)
+        if (_enemy is ISkillUser skillUser && skillUser.CanUseSkill)
         {
-            Debug.Log("공격 범위 내 진입");
-            _stateMachine.ChangeState(EnemyStateType.Combat);
+            _enemy.Mover.SetMoveSpeed(0f);
+            skillUser.UseSkill();
+            return;
         }
+
+        _enemy.FollowTarget();
     }
 
     public override void Exit()
     {
-        
+
     }
-}   
+}

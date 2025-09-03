@@ -4910,12 +4910,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a0d6670665e6734fb96eb6ff00e8c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossMissile
-  _mover: {fileID: -9149031735117495580}
-  _moveSpeed: 10
+  _moveSpeed: 20
   _rotSpeed: 360
-  _lifeTime: 5
-  _trackingTime: 2
+  _lifeTime: 10
+  _trackingTime: 6
   _target: {fileID: 0}
+  _startPos: {x: 0, y: 0, z: 0}
   _currentTrackingTimer: 0
   _moveDir: {x: 0, y: 0, z: 0}
 --- !u!114 &-9149031735117495580

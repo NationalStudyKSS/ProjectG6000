@@ -39,6 +39,7 @@ public abstract class Enemy : MonoBehaviour
     protected EnemyStateMachine _stateMachine; // 상태 머신
 
     public EnemyModel Model => _model;
+    public Mover Mover => _mover;
     public EnemyAnimator Animator => _animator;
 
     public float AttackRange => _attackRange;
@@ -143,6 +144,7 @@ public abstract class Enemy : MonoBehaviour
     {
         _navMeshAgent.SetDestination(_target.position);
         Vector3 direction = _navMeshAgent.desiredVelocity.normalized;
+        _mover.SetMoveSpeed(_model.MoveSpeed);
         _mover.Move(direction);
         _animator.PlayRun(_model.MoveSpeed);
     }

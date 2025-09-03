@@ -30,14 +30,4 @@ public class EnemyStateFirstMeet : EnemyState
         lookPos.y = 0;
         _enemy.transform.rotation = Quaternion.LookRotation(lookPos);
     }
-
-    // Animation Event용 함수
-    public void OnFirstMeetAnimationEnd()
-    {
-        // 앞으로는 FirstMeet 안 들어가게
-        _enemy.SetFirstMet();
-
-        // 전투 상태 진입
-        _stateMachine.ChangeState(EnemyStateType.Combat);
-    }
 }
