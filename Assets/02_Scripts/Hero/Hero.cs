@@ -100,6 +100,11 @@ public class Hero : MonoBehaviour
         _statusView.SetInetractionGuide(false, Vector3.zero);
     }
 
+    public void OnAttackStart()
+    {
+        
+    }
+
     /// <summary>
     /// 상호작용을 수행하는 함수
     /// </summary>
