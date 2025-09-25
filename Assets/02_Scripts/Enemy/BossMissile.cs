@@ -34,10 +34,18 @@ public class BossMissile : MonoBehaviour
             Debug.Log("목표를 포착하지 못했다...");
             return;
         }
-
         
         _currentTrackingTimer += Time.fixedDeltaTime;
         MoveToTarget();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Hero"))
+        {
+            Debug.Log("미사일이 히어로와 충돌했다!");
+            Destroy(gameObject); // 히어로와 충돌 시 미사일 파괴
+        }
     }
 
     public void MoveToTarget()
